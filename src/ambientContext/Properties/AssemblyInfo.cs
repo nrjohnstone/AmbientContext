@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ambientContext")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("AmbientContext")]
+[assembly: AssemblyDescription("Base class for implementing ambient context services")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ambientContext")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("Nathan Johnstone")]
+[assembly: AssemblyProduct("AmbientContext")]
+[assembly: AssemblyCopyright("Copyright © Nathan Johnstone 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
