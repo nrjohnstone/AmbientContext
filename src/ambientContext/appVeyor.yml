@@ -1,0 +1,44 @@
+﻿version: 0.0.1.{build}
+
+environment:
+  packageVersion: 0.0.1
+
+init:
+- ps: $env:buildVersion = "$env:packageVersion.$env:appveyor_build_number"
+- ps: $env:nugetVersion = "$env:packageVersion-beta-$env:appveyor_build_number"
+- ps: Update-AppveyorBuild -Version $env:buildVersion
+
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '$(buildVersion)'
+  assembly_file_version: '$(buildVersion)'
+  assembly_informational_version: '$(nugetVersion)'
+
+pull_requests:
+  do_not_increment_build_number: true
+
+branches:
+  only:
+  - master
+  - release
+
+configuration: Release
+
+nuget:
+  account_feed: true
+  disable_publish_on_pr: true
+
+cache:
+- ./src/packages -> **\packages.config
+
+before_build:
+- nuget restore ./src/AmbientContext.sln
+
+build:
+  project: ./src/AmbientContext.sln
+  publish_nuget: true
+  verbosity: minimal
+
+artifacts:
+- path: NuGet/Release/AmbientContext*.nupkg
