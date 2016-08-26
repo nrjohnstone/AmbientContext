@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbientContext", "AmbientContext.csproj", "{BF83580D-25DC-47F2-8F51-AFED6BDEC045}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbientContext.Tests", "..\AmbientContext.Tests\AmbientContext.Tests.csproj", "{6AA2A4A1-D069-46CB-AF64-BF36D2C5FA98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF83580D-25DC-47F2-8F51-AFED6BDEC045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF83580D-25DC-47F2-8F51-AFED6BDEC045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF83580D-25DC-47F2-8F51-AFED6BDEC045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF83580D-25DC-47F2-8F51-AFED6BDEC045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AA2A4A1-D069-46CB-AF64-BF36D2C5FA98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA2A4A1-D069-46CB-AF64-BF36D2C5FA98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA2A4A1-D069-46CB-AF64-BF36D2C5FA98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA2A4A1-D069-46CB-AF64-BF36D2C5FA98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
