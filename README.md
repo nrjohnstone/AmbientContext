@@ -22,12 +22,14 @@ public class AmbientDateTimeService : AmbientService<IDateTime>, IDateTime
 ```    
 and the adapter class might look like this
 
+```csharp
 public class DateTimeAdapter : IDateTime
 {
     public DateTime Now => DateTime.Now;
     public DateTime UtcNow => DateTime.UtcNow;
     public DateTime Today => DateTime.Today;
 }
+```
 
 # Default Instances
 If the derived service has an acceptable default, implement this by overriding the protected virtual DefaultCreate method.
@@ -41,7 +43,9 @@ the instance to be used internally.
 # Usage
 To use an AmbientService implementation, simply create a new instance and assign it to a read only property on the class.
 
+```csharp
 public readonly AmbientDateTimeService DateTime = new AmbientDateTimeService();
+```
 
 Since the AmbientDateTimeService will also implement theIDateTime interface, you can use it directly and it will act as a proxy to the 
 underlying instance of the wrapper that was created which in turn calls the .NET BCL DateTime static directly.
@@ -49,5 +53,6 @@ underlying instance of the wrapper that was created which in turn calls the .NET
 # Testing
 An AmbientService can be mocked for testing by setting the Instance property to a suitable mock/fake implementation.
 
+```csharp
 sut.DateTime.Instance = new Mock<IDateTime>();
-
+```
