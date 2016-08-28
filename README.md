@@ -7,6 +7,7 @@ AmbientService to allow substitution of a mock/fake during testing.
 
 A simple implementation for an AmbientDateTimeService might look like this
 
+```csharp
 public class AmbientDateTimeService : AmbientService<IDateTime>, IDateTime
 {
     protected override IDateTime DefaultCreate()
@@ -18,7 +19,7 @@ public class AmbientDateTimeService : AmbientService<IDateTime>, IDateTime
     public DateTime UtcNow => Instance.UtcNow;
     public DateTime Today => Instance.Today;
 }
-    
+```    
 and the adapter class might look like this
 
 public class DateTimeAdapter : IDateTime
