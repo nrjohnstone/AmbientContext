@@ -40,6 +40,12 @@ If there is no valid default, this means the user must supply the Create delegat
 Providing the static create delegate in the composition root means the first time the ambient service is used, this delegate will supply
 the instance to be used internally.
 
+If the AmbientDateTimeService above did not have a default create implementation, or if you simply wanted to override the existing default, then to set it in the composition root one would do
+
+```csharp
+AmbientDateTimeService.Create = () => new AlternativeDateTimeAdapter();
+```
+
 # Usage
 To use an AmbientService implementation, simply create a new instance and assign it to a read only property on the class.
 
