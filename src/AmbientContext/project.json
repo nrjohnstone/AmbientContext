@@ -1,5 +1,5 @@
 {
-  "version": "0.0.2-beta-*",
+  "version": "1.0.0",
   "description": "Ambient context core project.",
   "authors": [ "Nathan Johnstone" ],
   "packOptions": {
