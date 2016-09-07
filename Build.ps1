@@ -115,9 +115,15 @@ foreach ($project in $projects) {
     Exec { & dotnet restore $project.Item1 }
 }
 
-Header " RUN MS BUILD (against global.json)"
-Invoke-MSBuild
+# Header " RUN MS BUILD (against global.json)"
+# Invoke-MSBuild
 # Open-PSBuildLog
+
+# Build
+foreach ($project in $projects) {
+    Header " BUILDING $project"
+    Exec { & dotnet build $project.Item1 }
+}
 
 # Get Rivision
 Header " CHECK REVISION"
