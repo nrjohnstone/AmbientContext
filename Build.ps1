@@ -109,18 +109,11 @@ if(Test-Path .\artifacts) { Remove-Item .\artifacts -Force -Recurse }
 EnsureDotnetCliInstalled
 EnsurePsbuildInstalled
 
-# Package
+# Package and Build
 foreach ($project in $projects) {
     Header " RESTORING $project"
     Exec { & dotnet restore $project.Item1 }
-}
 
-# Header " RUN MS BUILD (against global.json)"
-# Invoke-MSBuild
-# Open-PSBuildLog
-
-# Build
-foreach ($project in $projects) {
     Header " BUILDING $project"
     Exec { & dotnet build $project.Item1 }
 }
