@@ -37,6 +37,7 @@ Task("Restore-NuGet-Packages")
 
 
 Task("Build")
+    .IsDependentOn("Update-Version")
     .Does(() =>
 {
     if(IsRunningOnWindows())
