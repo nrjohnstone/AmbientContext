@@ -1,4 +1,5 @@
 #addin "Newtonsoft.Json"
+#tool "nuget:?package=GitVersion.CommandLine"
 #tool "nuget:?package=xunit.runner.console"
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -82,6 +83,15 @@ Task("Get-DNV")
         Unzip("./tools/dnv.zip", "./tools");
     }
 });
+
+
+Task("Update-Version")
+    .Does(() => 
+{
+    GitVersion(new GitVersionSettings {
+        UpdateAssemblyInfo = true});
+});
+
 
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
