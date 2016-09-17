@@ -68,6 +68,19 @@ Task("Rebuild")
 { });
 
 
+Task("Pack-Nuget-Packages")
+    .Does(() => 
+{
+    var settings = new DotNetCorePackSettings
+    {
+        Configuration = "Release",
+        OutputDirectory = "./artifacts/"
+    };
+
+    DotNetCorePack("./src/AmbientContext/project.json", settings);
+});
+
+
 Task("Run-Unit-Tests")
     .Does(() =>
 {
@@ -95,7 +108,17 @@ Task("Update-Version")
 {
     GitVersion(new GitVersionSettings {
         UpdateAssemblyInfo = true});
-    StartPowershellFile("Update-AppveyorBuild -Version foo");
+    string version = GitVersion().SemVer;
+    Console.WriteLine(version);
+
+    var project = Newtonsoft.Json.Linq.JObject.Parse(
+        System.IO.File.ReadAllText("./src/AmbientContext/project.json", Encoding.UTF8));
+
+    project["version"].Replace(version);
+
+    System.IO.File.WriteAllText("./src/AmbientContext/project.json", project.ToString(), Encoding.UTF8);
+
+    // Console.WriteLine(projectJson);
 });
 
 
