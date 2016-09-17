@@ -1,4 +1,5 @@
 #addin "Newtonsoft.Json"
+#addin "Cake.Powershell"
 #tool "nuget:?package=GitVersion.CommandLine"
 #tool "nuget:?package=xunit.runner.console"
 //////////////////////////////////////////////////////////////////////
@@ -38,6 +39,7 @@ Task("Restore-NuGet-Packages")
 
 Task("Build")
     .IsDependentOn("Update-Version")
+    .IsDependentOn("Get-DotNetCli")
     .Does(() =>
 {
     if(IsRunningOnWindows())
@@ -93,6 +95,30 @@ Task("Update-Version")
         UpdateAssemblyInfo = true});
 });
 
+
+Task("Get-DotNetCli")
+    .Does(() =>
+{
+    DownloadFile("https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.ps1", "./tools/dotnet-install.ps1");
+    var version = "1.0.0-preview2-003121";
+    StartPowershellFile("./tools/dotnet-install.ps1", args =>
+        {
+            args.Append("Version", version);
+        });
+    
+    
+    string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+    string dotNetPath = userProfile + @"Local\Microsoft\dotnet";
+    if (!Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.Machine).Contains(dotNetPath))
+    {
+        string path = Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.Machine) + ";" + dotNetPath;
+        Console.WriteLine(path);
+        Environment.SetEnvironmentVariable("Path", path, EnvironmentVariableTarget.Machine);
+        Environment.SetEnvironmentVariable("Path", path);
+    }
+    
+    //Environment.SetEnvironmentVariable("Path", path, EnvironmentVariableTarget.Machine);
+});
 
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
