@@ -37,10 +37,13 @@ Task("Restore-NuGet-Packages")
 });
 
 
+
 Task("Build")
     .IsDependentOn("Update-Version")
     .Does(() =>
 {
+    DotNetCoreRestore();
+
     if(IsRunningOnWindows())
     {
       // Use MSBuild
