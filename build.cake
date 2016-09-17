@@ -37,7 +37,6 @@ Task("Restore-NuGet-Packages")
 });
 
 
-
 Task("Build")
     .IsDependentOn("Update-Version")
     .Does(() =>
@@ -87,19 +86,6 @@ Task("Run-Unit-Tests")
     var testAssemblies = GetFiles(".\\test\\AmbientContext.Tests\\bin\\" + configuration + "\\net451\\*\\AmbientContext.Tests.dll");
     Console.WriteLine(testAssemblies.Count());
     XUnit2(testAssemblies);
-});
-
-
-Task("Get-DNV")
-    .ContinueOnError()
-    .Does(() =>
-{
-    if (!FileExists("./tools/dnv.exe")) {
-        if (FileExists("./tools/updeps.exe"))
-            DeleteFile("./tools/updeps.exe");
-        DownloadFile("https://github.com/PhilipDaniels/dotnetversioning/raw/master/dnv.zip", "./tools/dnv.zip");
-        Unzip("./tools/dnv.zip", "./tools");
-    }
 });
 
 
