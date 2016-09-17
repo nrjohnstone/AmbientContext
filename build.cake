@@ -97,7 +97,8 @@ Task("Update-Version")
         UpdateAssemblyInfo = true});
     
     string version = GitVersion().InformationalVersion;
-    Environment.SetEnvironmentVariable("GitVersionInformational", version);    
+    Console.WriteLine("Version=" + version);
+    Environment.SetEnvironmentVariable("GitVersionInformational", version, EnvironmentVariableTarget.Machine);    
 });
 
 
