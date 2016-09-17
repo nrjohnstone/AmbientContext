@@ -68,7 +68,7 @@ Task("Rebuild")
 { });
 
 
-Task("Pack-Nuget-Packages")
+Task("Pack-Nuget")
     .Does(() => 
 {
     var settings = new DotNetCorePackSettings
@@ -108,7 +108,7 @@ Task("Update-Version")
 {
     GitVersion(new GitVersionSettings {
         UpdateAssemblyInfo = true});
-    string version = GitVersion().SemVer;
+    string version = GitVersion().FullSemVer;
     Console.WriteLine(version);
 
     var project = Newtonsoft.Json.Linq.JObject.Parse(
@@ -117,8 +117,6 @@ Task("Update-Version")
     project["version"].Replace(version);
 
     System.IO.File.WriteAllText("./src/AmbientContext/project.json", project.ToString(), Encoding.UTF8);
-
-    // Console.WriteLine(projectJson);
 });
 
 
