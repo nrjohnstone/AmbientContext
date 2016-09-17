@@ -96,14 +96,8 @@ Task("Update-Version")
     GitVersion(new GitVersionSettings {
         UpdateAssemblyInfo = true});
     
-    if (Environment.GetEnvironmentVariable("APPVEYOR") != null)
-    {
-        string version = GitVersion().InformationalVersion;
-        StartPowershellFile("Update-AppveyorBuild", args =>
-            {
-                args.Append("Version", version);
-            });
-    }
+    string version = GitVersion().InformationalVersion;
+    Environment.SetEnvironmentVariable("GitVersionInformational", version);    
 });
 
 

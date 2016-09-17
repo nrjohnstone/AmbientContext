@@ -10,7 +10,8 @@ nuget:
   disable_publish_on_pr: true
 
 build_script:
-- ps: Update-AppveyorBuild -Version "15-foo"
+- ps: .\Build.ps1 -target Update-Version
+- ps: Update-AppveyorBuild -Version %GitVersionInformational%
 - ps: .\Build.ps1
 
 test: off  
