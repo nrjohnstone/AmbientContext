@@ -1,5 +1,5 @@
-{
-  "version": "1.0.0",
+﻿{
+  "version": "1.0.1",
   "description": "Ambient context core project.",
   "authors": [ "Nathan Johnstone" ],
   "packOptions": {
@@ -23,6 +23,6 @@
   },
 
   "dependencies": {
-    "FluentAssertions": "4.14.0" 
+    "FluentAssertions": "4.14.0"
   }
 }
