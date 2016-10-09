@@ -73,14 +73,14 @@ function MD5HashFile([string] $filePath)
     }
     finally
     {
-        if ($file -ne $null)
+        if ($null -ne $file)
         {
             $file.Dispose()
         }
     }
 }
 
-Write-Host "Preparing to run build script..."
+Write-Verbose "Preparing to run build script..."
 
 if(!$PSScriptRoot){
     $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
@@ -131,8 +131,8 @@ if (!(Test-Path $PACKAGES_CONFIG)) {
 if (!(Test-Path $NUGET_EXE)) {
     Write-Verbose -Message "Trying to find nuget.exe in PATH..."
     $existingPaths = $Env:Path -Split ';' | Where-Object { (![string]::IsNullOrEmpty($_)) -and (Test-Path $_) }
-    $NUGET_EXE_IN_PATH = Get-ChildItem -Path $existingPaths -Filter "nuget.exe" | Select -First 1
-    if ($NUGET_EXE_IN_PATH -ne $null -and (Test-Path $NUGET_EXE_IN_PATH.FullName)) {
+    $NUGET_EXE_IN_PATH = Get-ChildItem -Path $existingPaths -Filter "nuget.exe" | Select-Object -First 1
+    if ($null -ne $NUGET_EXE_IN_PATH -and (Test-Path $NUGET_EXE_IN_PATH.FullName)) {
         Write-Verbose -Message "Found in PATH at $($NUGET_EXE_IN_PATH.FullName)."
         $NUGET_EXE = $NUGET_EXE_IN_PATH.FullName
     }
@@ -165,7 +165,8 @@ if(-Not $SkipToolPackageRestore.IsPresent) {
     }
 
     Write-Verbose -Message "Restoring tools from NuGet..."
-    $NuGetOutput = Invoke-Expression "&`"$NUGET_EXE`" install -ExcludeVersion -OutputDirectory `"$TOOLS_DIR`""
+	$nugetArgs = @('install','-ExcludeVersion','-OutputDirectory',$TOOLS_DIR);
+    $NuGetOutput = & $NUGET_EXE $nugetArgs
 
     if ($LASTEXITCODE -ne 0) {
         Throw "An error occured while restoring NuGet tools."
@@ -184,6 +185,7 @@ if (!(Test-Path $CAKE_EXE)) {
 }
 
 # Start Cake
-Write-Host "Running build script..."
-Invoke-Expression "& `"$CAKE_EXE`" `"$Script`" -target=`"$Target`" -configuration=`"$Configuration`" -verbosity=`"$Verbosity`" $UseMono $UseDryRun $UseExperimental $ScriptArgs"
+Write-Verbose "Running build script..."
+$cakeArgs = @($Script, "-target=$Target", "-configuration=$Configuration", "-verbosity=$Verbosity", $UseMono, $UseDryRun, $UseExperimental, $ScriptArgs);
+& $CAKE_EXE $cakeArgs
 exit $LASTEXITCODE
