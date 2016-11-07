@@ -1,5 +1,8 @@
 ﻿{
-  "version": "1.1.0-unstable.31",
+  "version": "1.1.0-unstable.35",
+  "dependencies": {
+    "NETStandard.Library": "1.6.0"
+  },
   "description": "Ambient context core project.",
   "authors": [
     "Nathan Johnstone"
@@ -26,11 +29,8 @@
           "COREFX"
         ]
       },
-      "imports": "dotnet5.4",
+      "imports": "dnxcore50",
       "dependencies": {}
     }
-  },
-  "dependencies": {
-    "FluentAssertions": "4.14.0"
   }
 }
