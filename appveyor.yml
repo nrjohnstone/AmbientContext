@@ -8,7 +8,9 @@ branches:
   - develop
   - release
 
-nuget:  
+nuget:  nuget:
+  account_feed: true
+  project_feed: true
   disable_publish_on_pr: true
 
 build_script:
@@ -22,6 +24,7 @@ artifacts:
   name: NuGet
   
 deploy:
+
 - provider: NuGet
   name: production
   api_key:
