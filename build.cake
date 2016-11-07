@@ -37,7 +37,6 @@ Task("Restore-NuGet-Packages")
 });
 
 
-
 Task("Build")
     .IsDependentOn("Update-Version")
     .Does(() =>
@@ -90,33 +89,22 @@ Task("Run-Unit-Tests")
 });
 
 
-Task("Get-DNV")
-    .ContinueOnError()
-    .Does(() =>
-{
-    if (!FileExists("./tools/dnv.exe")) {
-        if (FileExists("./tools/updeps.exe"))
-            DeleteFile("./tools/updeps.exe");
-        DownloadFile("https://github.com/PhilipDaniels/dotnetversioning/raw/master/dnv.zip", "./tools/dnv.zip");
-        Unzip("./tools/dnv.zip", "./tools");
-    }
-});
-
-
 Task("Update-Version")
     .Does(() => 
 {
     GitVersion(new GitVersionSettings {
         UpdateAssemblyInfo = true});
     string version = GitVersion().FullSemVer;
-    Console.WriteLine(version);
+    var projectFiles = System.IO.Directory.EnumerateFiles(@".\", "project.json", SearchOption.AllDirectories).ToArray();
 
-    var project = Newtonsoft.Json.Linq.JObject.Parse(
-        System.IO.File.ReadAllText("./src/AmbientContext/project.json", Encoding.UTF8));
+    foreach(var file in projectFiles)
+    {
+        var project = Newtonsoft.Json.Linq.JObject.Parse(System.IO.File.ReadAllText(file, Encoding.UTF8));
 
-    project["version"].Replace(version);
+        project["version"].Replace(version);
 
-    System.IO.File.WriteAllText("./src/AmbientContext/project.json", project.ToString(), Encoding.UTF8);
+        System.IO.File.WriteAllText(file, project.ToString(), Encoding.UTF8);
+    }
 });
 
 
