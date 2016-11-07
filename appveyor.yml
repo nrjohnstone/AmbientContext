@@ -13,6 +13,9 @@ nuget:
   project_feed: true
   disable_publish_on_pr: true
 
+build:
+    publish_nuget: true
+
 build_script:
 - ps: .\Build.ps1
 - ps: .\Build.ps1 -target Pack-Nuget
@@ -24,7 +27,6 @@ artifacts:
   name: NuGet
   
 deploy:
-
 - provider: NuGet
   name: production
   api_key:
