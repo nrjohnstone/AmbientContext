@@ -15,6 +15,14 @@
     "licenseUrl": "https://github.com/nrjohnstone/AmbientContext/blob/master/LICENSE"
   },
   "frameworks": {
+    "net45": {
+      "buildOptions": {
+        "define": [
+          "NET"
+        ]
+      },
+      "dependencies": {}
+    },
     "net451": {
       "buildOptions": {
         "define": [
