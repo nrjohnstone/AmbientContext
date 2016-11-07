@@ -94,7 +94,8 @@ Task("Update-Version")
 {
     GitVersion(new GitVersionSettings {
         UpdateAssemblyInfo = true});
-    string version = GitVersion().FullSemVer;
+    string version = GitVersion().NuGetVersion;
+	Console.WriteLine("Current NuGetVersion=" + version);
     var projectFiles = System.IO.Directory.EnumerateFiles(@".\", "project.json", SearchOption.AllDirectories).ToArray();
 
     foreach(var file in projectFiles)

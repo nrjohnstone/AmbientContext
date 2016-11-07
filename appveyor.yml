@@ -24,7 +24,6 @@ artifacts:
   name: NuGet
   
 deploy:
-
 - provider: NuGet
   name: production
   api_key:
@@ -32,3 +31,9 @@ deploy:
   on:
     branch: master
     appveyor_repo_tag: true
+- provider: NuGet
+  name: develop
+  api_key:
+    secure: '2K5EQwNNYpt5GMRVKxHTihZO2MZCUSbsngmYo63XPO73UoX0n7INS/4OGIrZ3mMe'
+  on:
+    branch: develop

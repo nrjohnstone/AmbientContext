@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.1.0-unstable.35",
+  "version": "1.1.0-unstable0045",
   "dependencies": {
     "NETStandard.Library": "1.6.0"
   },
@@ -15,15 +15,7 @@
     "licenseUrl": "https://github.com/nrjohnstone/AmbientContext/blob/master/LICENSE"
   },
   "frameworks": {
-    "net451": {
-      "buildOptions": {
-        "define": [
-          "NET"
-        ]
-      },
-      "dependencies": {}
-    },
-    "netstandard1.6": {
+    "netstandard1.1": {
       "buildOptions": {
         "define": [
           "COREFX"
