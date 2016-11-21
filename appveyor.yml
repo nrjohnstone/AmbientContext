@@ -8,7 +8,9 @@ branches:
   - develop
   - release
 
-nuget:  
+nuget:
+  account_feed: true
+  project_feed: true
   disable_publish_on_pr: true
 
 build_script:
@@ -29,3 +31,9 @@ deploy:
   on:
     branch: master
     appveyor_repo_tag: true
+- provider: NuGet
+  name: develop
+  api_key:
+    secure: '2K5EQwNNYpt5GMRVKxHTihZO2MZCUSbsngmYo63XPO73UoX0n7INS/4OGIrZ3mMe'
+  on:
+    branch: develop

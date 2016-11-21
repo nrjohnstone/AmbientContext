@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AmbientContext.Tests")]
+[assembly: AssemblyTitle("AmbientContext.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AmbientContext.Tests")]
+[assembly: AssemblyProduct("AmbientContext.Test")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6aa2a4a1-d069-46cb-af64-bf36d2c5fa98")]
+[assembly: Guid("880643b3-a8b5-492e-adac-9c17fa522a22")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -35,4 +35,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.1.0.0")]
 [assembly: AssemblyFileVersion("1.1.0.0")]
 
-[assembly: AssemblyInformationalVersion("1.1.0-unstable.31+Branch.develop.Sha.ce7b3b301892e5d7251433e118787d7c8376b524")]
+[assembly: AssemblyInformationalVersion("1.1.0+Branch.changeToCsproj.Sha.69d33fe498aa8b99a204137abeaec5e572494baa")]
