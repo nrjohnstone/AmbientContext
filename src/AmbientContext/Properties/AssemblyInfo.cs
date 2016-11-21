@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AmbientContext")]
-[assembly: AssemblyDescription("Base class for implementing ambient context services")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Nathan Johnstone")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AmbientContext")]
-[assembly: AssemblyCopyright("Copyright © Nathan Johnstone 2016")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("bf83580d-25dc-47f2-8f51-afed6bdec045")]
+[assembly: Guid("2c381e83-9719-4f08-925f-f5c1668a72f0")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,6 +32,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.1.0.0")]
-
-[assembly: AssemblyInformationalVersion("1.1.0-unstable.31+Branch.develop.Sha.ce7b3b301892e5d7251433e118787d7c8376b524")]
+[assembly: AssemblyVersion("1.1.0.0")]
 [assembly: AssemblyFileVersion("1.1.0.0")]
+
+[assembly: AssemblyInformationalVersion("1.1.0+Branch.changeToCsproj.Sha.69d33fe498aa8b99a204137abeaec5e572494baa")]
