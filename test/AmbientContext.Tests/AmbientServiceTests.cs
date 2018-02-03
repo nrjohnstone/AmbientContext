@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using FluentAssertions;
 using Xunit;
 
-namespace AmbientContext.Tests
+namespace AmbientContext.NetStandard.Tests
 {
     public class AmbientServiceTests : IDisposable
     {
@@ -18,7 +18,7 @@ namespace AmbientContext.Tests
 
         private class AmbientServiceNoDefault : AmbientService<IFoo>
         {
-            
+
         }
 
         private class AmbientServiceWithDefault : AmbientService<IFoo>
@@ -41,7 +41,7 @@ namespace AmbientContext.Tests
 
             Action instance = () =>
             {
-                var x = sut.Instance; 
+                var x = sut.Instance;
             };
 
             instance.ShouldThrow<Exception>();
@@ -53,9 +53,9 @@ namespace AmbientContext.Tests
             AmbientServiceNoDefault.Create = () => new Foo();
 
             var sut = new AmbientServiceNoDefault();
-            
+
             var instance = sut.Instance;
-            
+
             instance.Should().BeOfType<Foo>();
         }
 

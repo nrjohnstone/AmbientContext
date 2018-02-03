@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AmbientContext
+namespace AmbientContext.NetStandard
 {
     public abstract class AmbientService<T> where T : class
     {
