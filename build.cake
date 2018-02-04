@@ -1,5 +1,6 @@
 #addin "Newtonsoft.Json"
 #addin "Cake.Powershell"
+#addin "Cake.Incubator"
 #tool "nuget:?package=GitVersion.CommandLine"
 #tool "nuget:?package=xunit.runner.console"
 //////////////////////////////////////////////////////////////////////
@@ -26,89 +27,105 @@ var buildDir = Directory("./src/AmbientContext/bin") + Directory(configuration);
 Task("Clean")
     .Does(() =>
 {
-    CleanDirectory(buildDir);
+    var settings = new DotNetCoreCleanSettings
+     {         
+         Configuration = configuration      
+     };
+
+    DotNetCoreClean(solutionFile, settings);
 });
 
 
 Task("Restore-NuGet-Packages")
     .Does(() =>
 {
+    DotNetCoreRestore(solutionFile);
     NuGetRestore(solutionFile);
 });
 
 
-Task("Build")
+Task("Rebuild")
     .IsDependentOn("Clean")
+    .IsDependentOn("Update-Version")
+    .IsDependentOn("Restore-NuGet-Packages")
+    .IsDependentOn("Build");
+
+
+Task("Build")
     .IsDependentOn("Update-Version")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    DotNetCoreRestore();
+    var settings = new DotNetCoreBuildSettings
+    {
+        Configuration = configuration,
+        NoRestore = true    
+    };
 
-    if(IsRunningOnWindows())
-    {
-      // Use MSBuild
-      MSBuild(solutionFile, settings =>
-        settings.SetConfiguration(configuration));
-    }
-    else
-    {
-      // Use XBuild
-      XBuild(solutionFile, settings =>
-        settings.SetConfiguration(configuration));
-    }
+    DotNetCoreBuild(solutionFile, settings);
 });
 
 
 Task("Pack-Nuget")
     .Does(() => 
 {
-    EnsureDirectoryExists("./artifacts");
-    string version = GitVersion().NuGetVersion;
-
-    var binDir = Directory("./bin") ;
     var nugetPackageDir = Directory("./artifacts");
-
-    var nugetFilePaths = GetFiles("./src/AmbientContext/*.csproj");
-
-    var nuGetPackSettings = new NuGetPackSettings
-    {   
-        Version = version,
-        BasePath = binDir + Directory(configuration),
+    EnsureDirectoryExists(nugetPackageDir);
+    
+    var version = GitVersion();
+    var settings = new DotNetCorePackSettings
+    {
+        ArgumentCustomization = args=>args.Append("/p:PackageVersion=" + version.NuGetVersionV2),
+        Configuration = configuration,
         OutputDirectory = nugetPackageDir,
-        ArgumentCustomization = args => args.Append("-Prop Configuration=" + configuration)
+        NoRestore = true,
+        IncludeSymbols = true
     };
 
-    NuGetPack(nugetFilePaths, nuGetPackSettings);
+    DotNetCorePack("./src/AmbientContext/AmbientContext.csproj", settings);
 });
 
 
 Task("Run-Unit-Tests")
     .Does(() =>
 {
-    var testAssemblies = GetFiles(".\\test\\AmbientContext.Tests\\bin\\" + configuration + "\\AmbientContext.Tests.dll");
-    Console.WriteLine(testAssemblies.Count());
-    XUnit2(testAssemblies);
+    var netCoreTestSettings = new DotNetCoreTestSettings() {
+        Configuration = configuration,
+        NoBuild = true,
+        NoRestore = true
+    };
+
+     var netCoreXunitTestSettings = new XUnit2Settings {
+            HtmlReport = false,
+            UseX86 = true
+    };
+
+    DotNetCoreTest(netCoreTestSettings, "./test/AmbientContext.Tests/AmbientContext.Tests.csproj", netCoreXunitTestSettings);
 });
 
 
 Task("Update-Version")
     .Does(() => 
 {
-    GitVersion(new GitVersionSettings {
-        UpdateAssemblyInfo = true});
-    string version = GitVersion().NuGetVersion;
-	Console.WriteLine("Current NuGetVersion=" + version);
-    var projectFiles = System.IO.Directory.EnumerateFiles(@".\", "project.json", SearchOption.AllDirectories).ToArray();
-
-    foreach(var file in projectFiles)
-    {
-        var project = Newtonsoft.Json.Linq.JObject.Parse(System.IO.File.ReadAllText(file, Encoding.UTF8));
-
-        project["version"].Replace(version);
-
-        System.IO.File.WriteAllText(file, project.ToString(), Encoding.UTF8);
+     try 
+    {    
+        var assemblyInfoFile = Directory("./src/AmbientContext") + File("Properties/AssemblyVersionInfo.cs");
+        if (!FileExists(assemblyInfoFile))
+        {
+            Information("Assembly version file does not exist : " + assemblyInfoFile.Path);
+            CopyFile("./src/AssemblyVersionInfo.template.cs", assemblyInfoFile);
+        }
+        
+        GitVersion(new GitVersionSettings { 
+            NoFetch = false,
+            OutputType = GitVersionOutput.BuildServer,
+            UpdateAssemblyInfo = true,
+            UpdateAssemblyInfoFilePath = assemblyInfoFile });                    
     }
+    catch (Exception ex) {
+        Information(ex.ToString());
+        // Assume that we might be in a pull request build which cannot have the version calculated
+    }   
 });
 
 
