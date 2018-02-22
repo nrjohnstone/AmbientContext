@@ -8,6 +8,10 @@ namespace AmbientContext
 
         private T _instance;
 
+        /// <summary>
+        /// Delegate used to construct the initial instance of T
+        /// when Instance is null
+        /// </summary>
         public static CreateDelegate Create { get; set; }
 
         protected virtual T DefaultCreate()
