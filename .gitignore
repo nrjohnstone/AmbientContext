@@ -253,4 +253,5 @@ paket-files/
 
 # Ncrunch
 *.ncrunch*
+src/AmbientContext/Properties/AssemblyVersionInfo.cs
 tools/

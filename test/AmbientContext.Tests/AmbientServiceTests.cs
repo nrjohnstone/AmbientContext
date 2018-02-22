@@ -2,24 +2,17 @@ using System;
 using FluentAssertions;
 using Xunit;
 
-namespace AmbientContext.NetStandard.Tests
+namespace AmbientContext.Tests
 {
     public class AmbientServiceTests : IDisposable
     {
-        private interface IFoo
-        {
-        }
+        private interface IFoo { }
 
-        private class Foo : IFoo
-        {
-        }
+        private class Foo : IFoo { }
 
         private class Foo2 : IFoo { }
 
-        private class AmbientServiceNoDefault : AmbientService<IFoo>
-        {
-
-        }
+        private class AmbientServiceNoDefault : AmbientService<IFoo> { }
 
         private class AmbientServiceWithDefault : AmbientService<IFoo>
         {
@@ -60,6 +53,19 @@ namespace AmbientContext.NetStandard.Tests
         }
 
         [Fact]
+        public void Instance_WhenCreateDelegateSupplied_ShouldReturnSameInstanceForAllCalls()
+        {
+            AmbientServiceNoDefault.Create = () => new Foo();
+
+            var sut = new AmbientServiceNoDefault();
+
+            var instance1 = sut.Instance;
+            var instance2 = sut.Instance;
+
+            instance1.Should().BeSameAs(instance2);
+        }
+
+        [Fact]
         public void Instance_WhenDefaultDelegateSupplied_ShouldReturnInstance()
         {
             var sut = new AmbientServiceWithDefault();
@@ -70,7 +76,7 @@ namespace AmbientContext.NetStandard.Tests
         }
 
         [Fact]
-        public void Instance_WhenDefaultDelegateSuppliedAndCreateSet_ShouldReturnCreateInstance()
+        public void Instance_WhenDefaultDelegateSuppliedAndCreateSet_ShouldUseCreateInstanceInsteadOfDefault()
         {
             AmbientServiceWithDefault.Create = () => new Foo2();
             var sut = new AmbientServiceWithDefault();
@@ -81,7 +87,7 @@ namespace AmbientContext.NetStandard.Tests
         }
 
         [Fact]
-        public void Instance_WhenInstanceSet_ShouldReturnInstance()
+        public void Instance_WhenInstanceSet_ShouldReturnInstanceInsteadOfUsingCreate()
         {
             AmbientServiceWithDefault.Create = () => new Foo2();
             var sut = new AmbientServiceWithDefault();

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AmbientContext.NetStandard
+namespace AmbientContext
 {
     public abstract class AmbientService<T> where T : class
     {
@@ -8,6 +8,10 @@ namespace AmbientContext.NetStandard
 
         private T _instance;
 
+        /// <summary>
+        /// Delegate used to construct the initial instance of T
+        /// when Instance is null
+        /// </summary>
         public static CreateDelegate Create { get; set; }
 
         protected virtual T DefaultCreate()
