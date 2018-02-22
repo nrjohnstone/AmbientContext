@@ -7,20 +7,13 @@ namespace AmbientContext.Tests
 {
     public class AmbientServiceTests : IDisposable
     {
-        private interface IFoo
-        {
-        }
+        private interface IFoo { }
 
-        private class Foo : IFoo
-        {
-        }
+        private class Foo : IFoo { }
 
         private class Foo2 : IFoo { }
 
-        private class AmbientServiceNoDefault : AmbientService<IFoo>
-        {
-
-        }
+        private class AmbientServiceNoDefault : AmbientService<IFoo> { }
 
         private class AmbientServiceWithDefault : AmbientService<IFoo>
         {
