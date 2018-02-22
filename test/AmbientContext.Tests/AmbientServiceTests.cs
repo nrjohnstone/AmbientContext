@@ -1,8 +1,9 @@
 using System;
+using AmbientContext.NetStandard;
 using FluentAssertions;
 using Xunit;
 
-namespace AmbientContext.NetStandard.Tests
+namespace AmbientContext.Tests
 {
     public class AmbientServiceTests : IDisposable
     {
