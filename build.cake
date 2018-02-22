@@ -1,6 +1,6 @@
-#addin "Newtonsoft.Json"
-#addin "Cake.Powershell"
-#addin "Cake.Incubator"
+#addin "Newtonsoft.Json&version=11.0.1"
+#addin "Cake.Powershell&version=0.4.3"
+#addin "Cake.Incubator&version=1.7.2"
 #tool "nuget:?package=GitVersion.CommandLine"
 #tool "nuget:?package=xunit.runner.console"
 //////////////////////////////////////////////////////////////////////
@@ -72,7 +72,7 @@ Task("Pack-Nuget")
     var nugetPackageDir = Directory("./artifacts");
     EnsureDirectoryExists(nugetPackageDir);    
     var version = GitVersion().NuGetVersionV2;
-    
+
     var settings = new DotNetCorePackSettings
     {
         ArgumentCustomization = args=>args.Append("/p:PackageVersion=" + version),
