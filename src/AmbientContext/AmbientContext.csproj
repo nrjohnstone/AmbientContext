@@ -13,8 +13,8 @@
     <Authors>Nathan Johnstone</Authors>
     <Description>Base class for building ambient services</Description>
     <PackageProjectUrl>https://github.com/nrjohnstone/AmbientContext</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/nrjohnstone/AmbientContext</RepositoryUrl>
-    <Copyright>https://github.com/nrjohnstone/AmbientContext/blob/master/LICENSE</Copyright>
+    <RepositoryUrl>https://github.com/nrjohnstone/AmbientContext</RepositoryUrl>    
+    <PackageLicenseUrl>https://github.com/nrjohnstone/AmbientContext/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <Target Name="BeforeBuild" BeforeTargets="Build">
