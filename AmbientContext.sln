@@ -12,7 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		appveyor.yml = appveyor.yml
 		build.cake = build.cake
 		Build.ps1 = Build.ps1
-		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmbientContext", "src\AmbientContext\AmbientContext.csproj", "{FDAEE4AC-9547-49FA-8019-24EDF6B9F1D2}"
