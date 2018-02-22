@@ -61,6 +61,19 @@ namespace AmbientContext.Tests
         }
 
         [Fact]
+        public void Instance_WhenCreateDelegateSupplied_ShouldReturnSameInstanceForAllCalls()
+        {
+            AmbientServiceNoDefault.Create = () => new Foo();
+
+            var sut = new AmbientServiceNoDefault();
+
+            var instance1 = sut.Instance;
+            var instance2 = sut.Instance;
+
+            instance1.Should().BeSameAs(instance2);
+        }
+
+        [Fact]
         public void Instance_WhenDefaultDelegateSupplied_ShouldReturnInstance()
         {
             var sut = new AmbientServiceWithDefault();
@@ -71,7 +84,7 @@ namespace AmbientContext.Tests
         }
 
         [Fact]
-        public void Instance_WhenDefaultDelegateSuppliedAndCreateSet_ShouldReturnCreateInstance()
+        public void Instance_WhenDefaultDelegateSuppliedAndCreateSet_ShouldUseCreateInstanceInsteadOfDefault()
         {
             AmbientServiceWithDefault.Create = () => new Foo2();
             var sut = new AmbientServiceWithDefault();
@@ -82,7 +95,7 @@ namespace AmbientContext.Tests
         }
 
         [Fact]
-        public void Instance_WhenInstanceSet_ShouldReturnInstance()
+        public void Instance_WhenInstanceSet_ShouldReturnInstanceInsteadOfUsingCreate()
         {
             AmbientServiceWithDefault.Create = () => new Foo2();
             var sut = new AmbientServiceWithDefault();
