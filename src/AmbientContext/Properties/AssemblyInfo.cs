@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AmbientContext")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Base class for building ambient services")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Nathan Johnstone")]
 [assembly: AssemblyProduct("AmbientContext")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCopyright("Copyright © Nathan Johnstone 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
