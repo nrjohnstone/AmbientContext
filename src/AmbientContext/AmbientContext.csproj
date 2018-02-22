@@ -10,7 +10,7 @@
 
   <PropertyGroup>
     <PackageId>AmbientContext</PackageId>
-    <Authors>nrjohnstone</Authors>
+    <Authors>Nathan Johnstone</Authors>
     <Description>Base class for building ambient services</Description>
     <PackageProjectUrl>https://github.com/nrjohnstone/AmbientContext</PackageProjectUrl>
     <RepositoryUrl>https://github.com/nrjohnstone/AmbientContext</RepositoryUrl>
