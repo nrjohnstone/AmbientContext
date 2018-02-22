@@ -70,12 +70,12 @@ Task("Pack-Nuget")
     .Does(() => 
 {
     var nugetPackageDir = Directory("./artifacts");
-    EnsureDirectoryExists(nugetPackageDir);
+    EnsureDirectoryExists(nugetPackageDir);    
+    var version = GitVersion().NuGetVersionV2;
     
-    var version = GitVersion();
     var settings = new DotNetCorePackSettings
     {
-        ArgumentCustomization = args=>args.Append("/p:PackageVersion=" + version.NuGetVersionV2),
+        ArgumentCustomization = args=>args.Append("/p:PackageVersion=" + version),
         Configuration = configuration,
         OutputDirectory = nugetPackageDir,
         NoRestore = true,

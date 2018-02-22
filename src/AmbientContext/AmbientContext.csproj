@@ -8,6 +8,15 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>AmbientContext</PackageId>
+    <Authors>nrjohnstone</Authors>
+    <Description>Base class for building ambient services</Description>
+    <PackageProjectUrl>https://github.com/nrjohnstone/AmbientContext</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nrjohnstone/AmbientContext</RepositoryUrl>
+    <Copyright>https://github.com/nrjohnstone/AmbientContext/blob/master/LICENSE</Copyright>
+  </PropertyGroup>
+
   <Target Name="BeforeBuild" BeforeTargets="Build">
     <Copy Condition="!Exists('Properties\AssemblyVersionInfo.cs')" SourceFiles="$(SolutionDir)\src\AssemblyVersionInfo.template.cs" DestinationFiles="Properties\AssemblyVersionInfo.cs" />
   </Target>
